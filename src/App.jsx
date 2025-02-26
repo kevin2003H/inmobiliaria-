@@ -5,7 +5,7 @@ import logo from './assets/LOGO.png'; // Ruta al archivo logo.png
 
 // Importa las páginas
 import Home from './pages/home';
-import Properties from './pages/Properties';
+import Properties from './pages/properties';
 import Contact from './pages/Contact';
 import AboutPage from './pages/About';
 import Login from './pages/Login';
