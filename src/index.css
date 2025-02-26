@@ -1,0 +1,716 @@
+:root {
+  font-family: 'Poppins', sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color: #333;
+  background-color: #f9f9f9;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
+a:hover {
+  color: #535bf2;
+}
+
+/* Estilos del body */
+body {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  min-width: 320px;
+  min-height: 100vh;
+  color: #000;
+  font-family: Arial, sans-serif;
+  padding-top: 60px; /* Añadir espacio para el header */
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+  color: #646cff;
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  cursor: pointer;
+  transition: border-color 0.25s;
+  color: white;
+}
+button:hover {
+  border-color: #646cff;
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+
+}
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+  padding-top: 60px; /* Agrega un espacio arriba para evitar que el contenido quede detrás del header */
+}
+
+header {
+  background-color: #fff;
+  color: white;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between; /* Esto separa el logo de los enlaces */
+  align-items: center;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  
+
+}
+
+header h1 {
+  font-size: 1.8rem;
+  margin: 0;
+}
+
+nav {
+  display: flex;
+ justify-content: flex-start;  /* Alinea los enlaces a la izquierda; */
+  gap: 1rem; /* Espacio entre los enlaces */
+  width: 100%;
+}
+
+header nav .links {
+  display: flex;
+  justify-content: flex-start; /* Los enlaces se alinean a la izquierda */
+  gap: 1rem;
+  margin-right: auto; /* Esto empuja los enlaces a la derecha */
+}
+
+
+nav .login {
+  margin-left: auto;
+  margin-right: 40rem; /* Ajusta según lo necesites */
+  color: #ffd700;
+}
+
+
+header nav a {
+  margin: 0 3rem; 
+  color: black;
+  text-decoration: none;
+  border: 2px solid transparent; /* No hay borde inicialmente */
+  border-radius: 8px; /* Bordes redondeados */
+  transition: all 0.3s ease; /* Transición suave para los cambios */
+}
+
+/* Efecto hover para los enlaces del navbar */
+header nav a:hover {
+  color: #fff; /* Mantén el color blanco del texto */
+  background-color: #646cff; /* Fondo morado */
+  border: 2px solid #646cff; /* Borde morado al pasar el mouse */
+  box-shadow: 0 0 10px rgba(106, 13, 173, 0.4); /* Efecto de sombra suave */
+}
+
+
+header nav .login:hover {
+  background-color: #ffd700;
+  color: #fff; /* Mantener el color blanco */
+  border: none;
+  box-shadow: none; /* Eliminar la sombra */
+}
+
+/********************** Redes sociales en el header**************************** */
+
+.social-media {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  position: absolute;
+  right: 2rem; /* Ajusta según lo necesites */
+  top: 50%;
+  transform: translateY(-60%);
+  right: 10rem;
+  background: rgba(255, 255, 255, 0.8); /* Fondo semi-transparente */
+  background-color:#fff;
+  padding: 0.5rem 1rem;
+  border-radius: 8px; /* Bordes redondeados */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+
+.social-media:hover {
+  background: rgba(255, 255, 255, 1);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.social-media span {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.icon {
+  font-size: 1.5rem;
+  padding: 0.5rem; /* Espaciado interno */
+  background: white; /* Fondo blanco */
+  border-radius: 50%; /* Iconos redondos */
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.icon:hover {
+  transform: scale(1.1); /* Efecto de agrandamiento */
+}
+
+
+.whatsapp {
+  color: #25D366;
+  border: 2px solid #25D366;
+}
+.whatsapp:hover {
+  background: #25D366;
+  color: white;
+}
+
+.instagram {
+  color: #E4405F;
+  border: 2px solid #E4405F;
+}
+.instagram:hover {
+  background: #E4405F;
+  color: white;
+}
+
+/* ****************************************barra de busqueda************************************************/
+.search-bar {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  border: 2px solid #646cff;
+  border-radius: 8px;
+  padding: 5px;
+  margin: 0 20px;
+  width: 250px; /* Ajusta el tamaño */
+}
+
+.search-bar input {
+  border: none;
+  outline: none;
+  flex: 1;
+  padding: 5px;
+  font-size: 1rem;
+}
+
+.search-bar button {
+  background: #646cff;
+  border: none;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background 0.3s ease;
+}
+
+.search-bar button:hover {
+  background: #535bf2;
+}
+
+
+/* ****************************************Home************************************************/
+/* index.css */
+
+/* El contenedor principal que ocupa toda la pantalla y centra el contenido */
+.home-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  position: relative;  /* Cambié esto para poder posicionar de manera fluida */
+  top: 0; /* Asegura que el contenedor esté pegado al header */
+}
+
+.home-logo {
+  width: 150px; /* Ajusta el tamaño según necesites */
+  height: auto;
+  margin-bottom: 20px; /* Espacio entre el logo y el texto */
+}
+
+
+/* El contenedor con imagen de fondo */
+.content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background: url('https://img1.wallspic.com/crops/9/7/5/5/5/155579/155579-sala_de_estar-apartamento_tico-querido-habitacion-4_estrellas-3840x2160.jpg') center center/cover no-repeat;
+  background-size: cover;
+  height: 500px;
+  width: 80%;
+  border-radius: 10px;
+  overflow: hidden;
+  flex-direction: column;
+  padding: 5rem;
+}
+
+/* Fondo oscuro en el texto */
+.content h2, .content p {
+  color: white;
+  z-index: 1;  /* Asegura que el texto se vea sobre la imagen */
+  padding: 1rem;
+  background-color: rgba(0, 0, 0, 0.5);  /* Fondo oscuro semi-transparente */
+  border-radius: 8px;                    /* Bordes redondeados para el texto */
+  width: 70%;                             /* Ancho del contenedor del texto */
+}
+
+/* Títulos y texto centrado */
+h2 {
+  font-size: 2.5rem;
+}
+
+p {
+  font-size: 1.2rem;
+}
+
+
+/* ****************************************propiedades en home************************************************/
+/* Sección de propiedades */
+.properties-section {
+  text-align: center;
+  padding: 4rem 0;
+  background-color: #f9f9f9;
+}
+
+.properties-section h2 {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  color: #333;
+}
+
+/* Contenedor de propiedades */
+.properties-container {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+/* Tarjeta de cada propiedad */
+.property-card {
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  width: 300px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.property-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.property-card h3 {
+  font-size: 1.5rem;
+  margin: 1rem 0 0.5rem;
+  color: #333;
+}
+
+.property-card p {
+  color: #666;
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+/* Efecto hover */
+.property-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Fondo semi-transparente */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Asegúrate de que el modal tenga un z-index mayor */
+}
+
+.modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 500px;
+  width: 100%;
+  position: relative;
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: transparent;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+
+/* ****************************************propiedades************************************************/
+.properties-grid {
+  display: flex;
+  flex-wrap: wrap; /* Permite que las tarjetas se ajusten al tamaño de la pantalla */
+  justify-content: flex-start;
+  gap: 20px;
+  padding: 20px;
+}
+
+.property-card {
+  border: 1px solid #ddd;
+  padding: 15px;
+  border-radius: 10px;
+  text-align: center;
+  background: #fff;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+}
+
+.property-card:hover {
+  transform: scale(1.05);
+}
+
+.property-image {
+  width: 100%;
+  height: 200px; /* Ajusta el tamaño de la imagen */
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.whatsapp-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #25d366;
+  color: white;
+  padding: 8px;
+  text-decoration: none;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+.whatsapp-button:hover {
+  background-color: #1ebe57;
+}
+
+.details-button {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 8px 12px;
+  text-decoration: none;
+  background-color: #007bff;
+  color: white;
+  border-radius: 5px;
+}
+
+.details-button:hover {
+  background-color: #0056b3;
+}
+
+/* ****************************************contact************************************************/
+
+.contact-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  padding: 4rem;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.contact-form {
+  flex: 1;
+  background: #fff;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.contact-form h2 {
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.contact-form form {
+  display: flex;
+  flex-direction: column;
+}
+
+.contact-form label {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.contact-form button {
+  background-color: #646cff;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.contact-form button:hover {
+  background-color: #535bf2;
+}
+
+/* Estilos para la sección de redes sociales */
+.contact-social {
+  flex: 1;
+  text-align: center;
+  padding: 2rem;
+  background:#538dd8;
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.contact-social h2 {
+  margin-bottom: 1rem;
+}
+
+.contact-social p {
+  margin-bottom: 2rem;
+}
+
+.social-icons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.social-icons a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.2rem;
+  color: #333;
+  text-decoration: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  transition: 0.3s;
+  width: 250px;
+  justify-content: center;
+}
+
+.social-icons .icon {
+  font-size: 1.5rem;
+}
+
+.social-icons .whatsapp {
+  color: #25D366;
+}
+
+.social-icons .instagram {
+  color: #E4405F;
+}
+
+.social-icons .facebook {
+  color: #1877F2;
+}
+
+.social-icons a:hover {
+  background: rgba(10, 10, 10, 0.50);
+}
+
+
+
+/* ****************************************about************************************************/
+/* src/pages/About.css */
+
+.about-container {
+  padding: 40px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 1200px;
+  margin: 50px auto;
+}
+
+.about-title {
+  text-align: center;
+  font-size: 2.5rem;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.about-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 30px;
+}
+
+.about-text {
+  flex: 1;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #555;
+}
+
+.about-values {
+  flex: 1;
+  background-color: #007bff;
+  color: white;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.about-values h3 {
+  font-size: 1.6rem;
+  margin-bottom: 20px;
+}
+
+.about-values ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.about-values li {
+  font-size: 1.1rem;
+  margin-bottom: 10px;
+}
+
+.about-values li strong {
+  font-weight: bold;
+}
+
+.about-values li::before {
+  content: "• ";
+  color: #fff;
+}
+
+
+/* ****************************************Footer************************************************/
+
+footer {
+  background: #333;
+  color: white;
+  text-align: center;
+  padding: -15rem 0;
+  width: 100%;
+  position: fixed;
+  bottom: 0;  /* Se mantiene pegado al fondo de la ventana */
+  left: 0;
+  z-index: 1000; /* Para asegurarse de que esté encima de otros elementos */
+}
+
+
+/* ****************************************Footer************************************************/
+/* src/pages/Login.css */
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f4f4f4;
+}
+
+.login-form {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 300px;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.input-group {
+  margin-bottom: 15px;
+}
+
+.input-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 14px;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 8px;
+  font-size: 16px;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+}
+
+.input-group input:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+.error-message {
+  color: red;
+  font-size: 14px;
+  text-align: center;
+}
+
+.login-btn {
+  width: 100%;
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.login-btn:hover {
+  background-color: #0056b3;
+}
