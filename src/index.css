@@ -377,6 +377,53 @@ header nav .login:hover {
   margin-top: -1rem; /* Ajuste específico para el título */
 }
 
+/* Ajuste del header y logo en pantallas pequeñas */
+@media (max-width: 768px) {
+  .home-logo {
+    width: 200px; /* Reducimos el tamaño del logo */
+    margin-bottom: 10px;
+  }
+
+  .home-container {
+    height: auto; /* Permitimos que crezca según el contenido */
+    padding: 1rem;
+    text-align: center;
+    margin-top: 6rem; /* Ajusta este valor según lo necesites */
+  }
+
+  .content {
+    padding: 1rem;
+    width: 100%;
+  }
+
+  .content h2 {
+    font-size: 1.4rem;
+    margin: 10px 0;
+  }
+
+  .content p {
+    font-size: 1rem;
+    margin: 5px 0;
+  }
+
+  .content > .home-logo,
+  .content > p,
+  .content > h2 {
+    background-color: rgba(255, 255, 255, 0.7); /* Hacemos el fondo más claro */
+    padding: 0.8rem; /* Reducimos el padding */
+  }
+}
+
+/* Ajuste del contenedor de contacto */
+@media (max-width: 768px) {
+  .contact-box {
+    width: 90%;
+    margin: 0 auto;
+    padding: 0.8rem;
+    text-align: center;
+    border-radius: 10px;
+  }
+}
 /* ****************************************propiedades en home************************************************/
 .properties-section {
   padding: 3rem 0;
@@ -457,80 +504,7 @@ header nav .login:hover {
   }
 }
 
-* ****************************************RESPONSIVE DESIGN****************************************/
-/* Pantallas menores a 1024px (Tablets y laptops pequeñas) */
-@media (max-width: 1024px) {
-  .home-container {
-    padding-left: 1.5rem;
-    padding-right: 3rem;
-    height: 50vh;
-  }
 
-  .content h2 {
-    font-size: 1.8rem;
-  }
-
-  .content p {
-    font-size: 1rem;
-  }
-
-  .home-logo {
-    width: 160px;
-  }
-}
-
-/* Pantallas menores a 768px (Celulares grandes) */
-@media (max-width: 768px) {
-  .home-container {
-    height: auto;
-    padding-left: 1rem;
-    padding-right: 1rem;
-  }
-
-  .content {
-    padding: 1rem;
-  }
-
-  .home-logo {
-    width: 140px;
-  }
-
-  .content h2 {
-    font-size: 1.5rem;
-  }
-
-  .content p {
-    font-size: 0.9rem;
-  }
-
-  .properties-container {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .property-card {
-    width: 90%;
-  }
-}
-
-/* Pantallas menores a 480px (Celulares pequeños) */
-@media (max-width: 480px) {
-  .home-container {
-    padding: 1rem;
-  }
-
-  .home-logo {
-    width: 120px;
-  }
-
-  .content h2 {
-    font-size: 1.2rem;
-  }
-
-  .content p {
-    font-size: 0.8rem;
-  }
-}
 
 /* ****************************************propiedades************************************************/
 .properties-grid {
