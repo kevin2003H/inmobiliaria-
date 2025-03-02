@@ -62,7 +62,7 @@ function App() {
 
         {/* Footer */}
         <footer>
-          <p>© 2025 Inmobiliaria App. Todos los derechos reservados.</p>
+          <p>© 2025 Carmona Inmobiliaria. Todos los derechos reservados.</p>
         </footer>
       </div>
     </Router>
