@@ -771,7 +771,7 @@ header nav .login:hover {
 }
 
 .modal-content {
-  background: white;
+  background: rgba(192, 202, 250, 0.5);
   padding: 20px;
   border-radius: 10px;
   max-width: 90%;

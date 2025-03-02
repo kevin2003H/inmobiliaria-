@@ -42,8 +42,8 @@ function App() {
           {/* Nueva sección para Redes */}
           <div className="social-media">
             <span>contactanos:</span>
-            <a href="https://wa.me/3219536912" target="_blank" rel="noopener noreferrer">
-              <FaWhatsapp className="icon whatsapp" />
+            <a href="https://wa.me/573219536912" target="_blank" rel="noopener noreferrer">
+            <FaWhatsapp className="icon whatsapp" />
             </a>
             <a href="https://instagram.com/carmona_inmobiliaria" target="_blank" rel="noopener noreferrer">
               <FaInstagram className="icon instagram" />

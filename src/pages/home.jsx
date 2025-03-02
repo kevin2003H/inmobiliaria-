@@ -113,9 +113,9 @@ function Home() {
         <div className="properties-container">
           {/* Propiedad 1 con Carrusel */}
           <div className="property-card" onClick={() => handleOpenModal({
-            title: 'Casa 1',
-            description: 'Descripción de la Casa 1',
-            price: '$1,700MM',
+            title: 'casa campestre ubicada en Cerritos Pereira',
+            description: 'para mas informacion contactanos',
+            price: '',
             images: [casa1_1, casa1_2, casa1_3, casa1_4, casa1_5, casa1_6, casa1_7, casa1_8, casa1_9, casa1_10, casa1_11, casa1_12],
           })}>
             <Swiper navigation={true} modules={[Navigation]} className="swiper-container">
@@ -123,8 +123,8 @@ function Home() {
               <SwiperSlide><img src={casa1_2} alt="Casa 1 - Foto 2" /></SwiperSlide>
               <SwiperSlide><img src={casa1_3} alt="Casa 1 - Foto 3" /></SwiperSlide>
             </Swiper>
-            <h3></h3>
-            <p></p>
+            <h3>casa campestre ubicada en Cerritos Pereira</h3>
+            <p>para mas informacion contactanos</p>
           </div>
 
           {/* Propiedad 2 con Carrusel */}

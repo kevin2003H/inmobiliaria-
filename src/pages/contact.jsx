@@ -60,13 +60,13 @@ const Contact = () => {
         <p>¡También puedes escribirnos en nuestras redes sociales!</p>
 
         <div className="social-icons">
-          <a href="https://wa.me/3219536912" target="_blank" rel="noopener noreferrer">
-            <FaWhatsapp className="icon whatsapp" /> WhatsApp
-          </a>
+        <a href="https://wa.me/573219536912" target="_blank" rel="noopener noreferrer">
+  <FaWhatsapp className="icon whatsapp" /> WhatsApp
+</a>
           <a href="carmona_inmobiliaria" target="_blank" rel="noopener noreferrer">
             <FaInstagram className="icon instagram" /> Instagram
           </a>
-          <a href="https://facebook.com/tu_perfil" target="_blank" rel="noopener noreferrer">
+          <a href="https://facebook.com/Carmona Inmobiliaria " target="_blank" rel="noopener noreferrer">
             <FaFacebook className="icon facebook" /> Facebook
           </a>
         </div>

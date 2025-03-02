@@ -94,12 +94,12 @@ function Properties() {
     const fakeData = [
       {
         id: 1,
-        title: "",
+        title: "Casa campestre ubicada en Cerritos Pereira",
         images: [casa1_1, casa1_2, casa1_3, casa1_4, casa1_5, casa1_6, casa1_7, casa1_8, casa1_9, casa1_10, casa1_11, casa1_12],
         price: "",
-        location: "",
+        location: "Casa campestre ubicada en Cerritos Pereira",
         description:"",
-        agentPhone: "",
+        agentPhone: "573219536912",
       },
       {
         id: 2,
@@ -108,7 +108,7 @@ function Properties() {
         price: "Precio venta: $1.700MM - Pago Adm $560.000 - predial año 2024 $130.000",
         location: "Cerritos Pereira",
         description:"Estrato 6. Gas natural, agua de Aguas y Aguas, Energía de Pereira, internet y tv por Claro Satelital, Dos pisos independientes: Primer piso: tres habitaciones dos baños, sala comedor, cocina integral, alacena y zona de ropas y para elsegundo piso:dos habitaciones, dos baños, sala comedor, cocina integral y zona de ropas , cuenta tambien con Parqueadero para dos carros, jacuzzi y amílicas zonas verdes " ,
-        agentPhone: "3219536912",
+        agentPhone: "573219536912",
       },
       {
         id: 3,
@@ -117,7 +117,7 @@ function Properties() {
         price: "3200millones - 1.400.000 admin",
         location: "Cerritos Pereira",
         description: "un área de tres mil setecientos metros cuadrados (3.700) mts² y un área construida de novecientos metros cuadrados (900) mts². La primer (1) planta cuenta con dos (2) alcobas con closet, un (1) estudio, un (1) baño completo, sala, comedor, baño social, cocina integral, zona de ropas, alcoba de servicio con baño, parqueadero cubierto para tres (3) automóviles y descubierto para diez (10) automóviles. La segunda planta consta de tres (3) alcobas, principal con vestier, baño privado y balcón, closet en madera, baño social completo y dos (2) balcones. La casa campestre cuenta con piscina, dos (2) jacuzzis, zona BBQ y zonas verdes. Sector con servicio de transporte público, cerca de colegios, restaurantes y parques.",
-        agentPhone: "3219536912",
+        agentPhone: "573219536912",
       },
     ];
     setProperties(fakeData);
