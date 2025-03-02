@@ -688,6 +688,74 @@ header nav .login:hover {
   background: rgba(10, 10, 10, 0.50);
 }
 
+@media (max-width: 768px) {
+  .contact-container {
+    flex-direction: column; /* Apila el formulario y redes sociales */
+    padding: 2rem;
+  }
+
+  .contact-form,
+  .contact-social {
+    width: 100%; /* Ocupar todo el ancho disponible */
+    padding: 1.5rem;
+  }
+
+  .social-icons a {
+    width: 100%; /* Ajusta los botones a pantalla completa */
+  }
+}
+
+@media (max-width: 480px) {
+  .contact-container {
+    padding: 1.5rem; /* Reducir padding */
+  }
+
+  .contact-form,
+  .contact-social {
+    padding: 1rem; /* Hacerlo más compacto */
+  }
+
+  .contact-form input,
+  .contact-form textarea {
+    font-size: 1rem; /* Asegurar buena lectura */
+  }
+
+  .social-icons a {
+    font-size: 1rem; /* Ajustar tamaño del texto */
+    padding: 8px 15px; /* Reducir padding de los botones */
+  }
+}
+
+
+@media (max-width: 1024px) {
+  .contact-container {
+    flex-direction: column; /* Se apilan los elementos */
+    padding: 3rem;
+  }
+
+  .contact-form,
+  .contact-social {
+    width: 90%; /* Reducir el ancho para centrar los elementos */
+    padding: 2rem;
+  }
+
+  .social-icons a {
+    width: 80%; /* Ajuste ligero en el ancho */
+  }
+}
+
+
+@media (min-width: 1200px) {
+  .contact-container {
+    max-width: 1200px;
+    padding: 4rem;
+  }
+
+  .contact-form,
+  .contact-social {
+    padding: 3rem;
+  }
+}
 
 
 /* ****************************************about************************************************/
