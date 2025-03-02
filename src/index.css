@@ -388,7 +388,7 @@ header nav .login:hover {
     height: auto; /* Permitimos que crezca según el contenido */
     padding: 1rem;
     text-align: center;
-    margin-top: 12rem; /* Ajusta este valor según lo necesites */
+    margin-top: 25rem; /* Ajusta este valor según lo necesites */
   }
 
   .content {
