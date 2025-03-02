@@ -457,6 +457,81 @@ header nav .login:hover {
   }
 }
 
+* ****************************************RESPONSIVE DESIGN****************************************/
+/* Pantallas menores a 1024px (Tablets y laptops pequeñas) */
+@media (max-width: 1024px) {
+  .home-container {
+    padding-left: 1.5rem;
+    padding-right: 3rem;
+    height: 50vh;
+  }
+
+  .content h2 {
+    font-size: 1.8rem;
+  }
+
+  .content p {
+    font-size: 1rem;
+  }
+
+  .home-logo {
+    width: 160px;
+  }
+}
+
+/* Pantallas menores a 768px (Celulares grandes) */
+@media (max-width: 768px) {
+  .home-container {
+    height: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .content {
+    padding: 1rem;
+  }
+
+  .home-logo {
+    width: 140px;
+  }
+
+  .content h2 {
+    font-size: 1.5rem;
+  }
+
+  .content p {
+    font-size: 0.9rem;
+  }
+
+  .properties-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .property-card {
+    width: 90%;
+  }
+}
+
+/* Pantallas menores a 480px (Celulares pequeños) */
+@media (max-width: 480px) {
+  .home-container {
+    padding: 1rem;
+  }
+
+  .home-logo {
+    width: 120px;
+  }
+
+  .content h2 {
+    font-size: 1.2rem;
+  }
+
+  .content p {
+    font-size: 0.8rem;
+  }
+}
+
 /* ****************************************propiedades************************************************/
 .properties-grid {
   display: flex;
