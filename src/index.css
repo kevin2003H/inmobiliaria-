@@ -507,9 +507,6 @@ header nav .login:hover {
 
 /* ****************************************propiedades************************************************/
 
-
-
-
 .properties-grid {
   display: flex;
   flex-wrap: wrap;
@@ -570,6 +567,7 @@ header nav .login:hover {
 .details-button:hover {
   background-color: #0056b3;
 }
+
 
 /* ****************************************contact************************************************/
 
@@ -691,7 +689,8 @@ header nav .login:hover {
 @media (max-width: 768px) {
   .contact-container {
     flex-direction: column; /* Apila el formulario y redes sociales */
-    padding: 2rem;
+    padding: 5rem;
+    margin-top: 8rem; /* Añadir margen superior */
   }
 
   .contact-form,
@@ -707,22 +706,40 @@ header nav .login:hover {
 
 @media (max-width: 480px) {
   .contact-container {
-    padding: 1.5rem; /* Reducir padding */
+    padding: 1rem; /* Menos espacio alrededor */
+    margin-top: 5rem; /* Añadir margen superior */
   }
 
   .contact-form,
   .contact-social {
-    padding: 1rem; /* Hacerlo más compacto */
+    padding: 0.8rem; /* Reducir el padding interno */
+    border-radius: 8px; /* Bordes menos pronunciados */
+  }
+
+  .contact-form h2,
+  .contact-social h2 {
+    font-size: 1.2rem; /* Hacer los títulos más pequeños */
   }
 
   .contact-form input,
   .contact-form textarea {
-    font-size: 1rem; /* Asegurar buena lectura */
+    font-size: 0.9rem; /* Hacer el texto más compacto */
+    padding: 8px; /* Reducir espacio interno */
+  }
+
+  .contact-form button {
+    font-size: 0.9rem; /* Ajustar el tamaño del botón */
+    padding: 8px;
   }
 
   .social-icons a {
-    font-size: 1rem; /* Ajustar tamaño del texto */
-    padding: 8px 15px; /* Reducir padding de los botones */
+    font-size: 1rem; /* Hacer los botones más pequeños */
+    padding: 6px 12px; /* Reducir el espacio dentro de los botones */
+    width: 100%; /* Que ocupen el ancho pero sin ser tan grandes */
+  }
+
+  .social-icons .icon {
+    font-size: 1.2rem; /* Iconos un poco más pequeños */
   }
 }
 
@@ -731,6 +748,7 @@ header nav .login:hover {
   .contact-container {
     flex-direction: column; /* Se apilan los elementos */
     padding: 3rem;
+    margin-top: 8rem; /* Añadir margen superior */
   }
 
   .contact-form,
@@ -749,6 +767,7 @@ header nav .login:hover {
   .contact-container {
     max-width: 1200px;
     padding: 4rem;
+    margin-top: 9rem; /* Añadir margen superior */
   }
 
   .contact-form,
