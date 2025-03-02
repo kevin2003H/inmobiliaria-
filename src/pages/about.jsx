@@ -9,13 +9,11 @@ function About() {
       <div className="about-content">
         <div className="about-text">
           <p>
-            Somos una inmobiliaria con más de 10 años de experiencia en el sector, 
-            ayudando a nuestros clientes a encontrar su hogar ideal o la inversión perfecta. 
-            Nuestra misión es brindar un servicio personalizado y profesional para que tu 
-            experiencia de compra o alquiler sea lo más fácil y satisfactoria posible.
+          Carmona inmobiliaria es una empresa en la ciudad de Pereira capital del eje cafetero, 
+          dedicada a la prestación de servicios inmobiliarios dándote una asesoría personalizada basados en la honestidad y cumplimientos de las negociaciones y el seguimiento continuo a sus clientes.
           </p>
           <p>
-            Nos especializamos en propiedades de alta calidad, tanto residenciales como comerciales, 
+            Nos especializamos en propiedades de alta calidad 
             y trabajamos incansablemente para ofrecer las mejores opciones a nuestros clientes.
           </p>
         </div>

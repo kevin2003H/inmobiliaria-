@@ -12,7 +12,7 @@ const Modal = ({ isOpen, onClose, property }) => {
         <img src={property.images[0]} alt={property.title} className="modal-image" />
         <p><strong>Precio:</strong> {property.price}</p>
         <p><strong>Ubicación:</strong> {property.location}</p>
-        <p><strong>Habitaciones:</strong> {property.rooms}</p>
+        <p><strong>descripcion:</strong> {property.description}</p>
         <a href={`https://wa.me/${property.agentPhone}`} target="_blank" rel="noopener noreferrer" className="whatsapp-button">
           Contactar
         </a>

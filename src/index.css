@@ -129,7 +129,6 @@ header nav .links {
 
 nav .login {
   margin-left: auto; /* Empuja el login a la derecha */
-  
   color: #ffd700;
   font-weight: bold;
 }
@@ -377,53 +376,6 @@ header nav .login:hover {
   margin-top: -1rem; /* Ajuste específico para el título */
 }
 
-/* Ajuste del header y logo en pantallas pequeñas */
-@media (max-width: 768px) {
-  .home-logo {
-    width: 200px; /* Reducimos el tamaño del logo */
-    margin-bottom: 10px;
-  }
-
-  .home-container {
-    height: auto; /* Permitimos que crezca según el contenido */
-    padding: 1rem;
-    text-align: center;
-    margin-top: 25rem; /* Ajusta este valor según lo necesites */
-  }
-
-  .content {
-    padding: 1rem;
-    width: 100%;
-  }
-
-  .content h2 {
-    font-size: 1.4rem;
-    margin: 10px 0;
-  }
-
-  .content p {
-    font-size: 1rem;
-    margin: 5px 0;
-  }
-
-  .content > .home-logo,
-  .content > p,
-  .content > h2 {
-    background-color: rgba(255, 255, 255, 0.7); /* Hacemos el fondo más claro */
-    padding: 0.8rem; /* Reducimos el padding */
-  }
-}
-
-/* Ajuste del contenedor de contacto */
-@media (max-width: 768px) {
-  .contact-box {
-    width: 90%;
-    margin: 0 auto;
-    padding: 0.8rem;
-    text-align: center;
-    border-radius: 10px;
-  }
-}
 /* ****************************************propiedades en home************************************************/
 .properties-section {
   padding: 3rem 0;
@@ -504,15 +456,68 @@ header nav .login:hover {
   }
 }
 
+/* Ajuste del header y logo en pantallas pequeñas */
+@media (max-width: 768px) {
+  .home-logo {
+    width: 120px; /* Reducimos el tamaño del logo */
+    margin-bottom: 10px;
+  }
+
+  .home-container {
+    height: auto; /* Permitimos que crezca según el contenido */
+    padding: 1rem;
+    text-align: center;
+    margin-top: 170px;
+  }
+
+  .content {
+    padding: 1rem;
+    width: 100%;
+  }
+
+  .content h2 {
+    font-size: 1.4rem;
+    margin: 10px 0;
+  }
+
+  .content p {
+    font-size: 1rem;
+    margin: 5px 0;
+  }
+
+  .content > .home-logo,
+  .content > p,
+  .content > h2 {
+    background-color: rgba(255, 255, 255, 0.7); /* Hacemos el fondo más claro */
+    padding: 0.8rem; /* Reducimos el padding */
+  }
+}
+
+/* Ajuste del contenedor de contacto */
+@media (max-width: 768px) {
+  .contact-box {
+    width: 90%;
+    margin: 0 auto;
+    padding: 0.8rem;
+    text-align: center;
+    border-radius: 10px;
+  }
+}
 
 
 /* ****************************************propiedades************************************************/
+
+
+
+
 .properties-grid {
   display: flex;
-  flex-wrap: wrap; /* Permite que las tarjetas se ajusten al tamaño de la pantalla */
-  justify-content: flex-start;
+  flex-wrap: wrap;
+  justify-content: center; /* Centra las tarjetas */
   gap: 20px;
   padding: 20px;
+  width: 100%;
+  max-width: 1200px; /* Ajusta el ancho máximo */
 }
 
 .property-card {

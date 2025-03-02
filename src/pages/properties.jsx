@@ -75,7 +75,7 @@ const Modal = ({ isOpen, onClose, property }) => {
         </Swiper>
         <p><strong>Precio:</strong> {property.price}</p>
         <p><strong>Ubicación:</strong> {property.location}</p>
-        <p><strong>Habitaciones:</strong> {property.rooms}</p>
+        <p><strong>descripcion:</strong> {property.description}</p>
         <a href={`https://wa.me/${property.agentPhone}`} target="_blank" rel="noopener noreferrer" className="whatsapp-button">
           Contactar
         </a>
@@ -94,30 +94,30 @@ function Properties() {
     const fakeData = [
       {
         id: 1,
-        title: "Casa en la playa",
+        title: "",
         images: [casa1_1, casa1_2, casa1_3, casa1_4, casa1_5, casa1_6, casa1_7, casa1_8, casa1_9, casa1_10, casa1_11, casa1_12],
-        price: "$200,000",
-        location: "Cancún, México",
-        rooms: 3,
-        agentPhone: "1234567890",
+        price: "",
+        location: "",
+        description:"",
+        agentPhone: "",
       },
       {
         id: 2,
-        title: "Departamento en la ciudad",
+        title: "Casa campestre ubicada en Cerritos Pereira",
         images: [casa2_1, casa2_2, casa2_3, casa2_4, casa2_5, casa2_6, casa2_7, casa2_8, casa2_9],
-        price: "$150,000",
-        location: "Ciudad de México",
-        rooms: 2,
-        agentPhone: "0987654321",
+        price: "Precio venta: $1.700MM - Pago Adm $560.000 - predial año 2024 $130.000",
+        location: "Cerritos Pereira",
+        description:"Estrato 6. Gas natural, agua de Aguas y Aguas, Energía de Pereira, internet y tv por Claro Satelital, Dos pisos independientes: Primer piso: tres habitaciones dos baños, sala comedor, cocina integral, alacena y zona de ropas y para elsegundo piso:dos habitaciones, dos baños, sala comedor, cocina integral y zona de ropas , cuenta tambien con Parqueadero para dos carros, jacuzzi y amílicas zonas verdes " ,
+        agentPhone: "3219536912",
       },
       {
         id: 3,
-        title: "Casa en las montañas",
+        title: "Casa campestre para la renta, ubicada en Cerritos Pereira",
         images: [casa3_1, casa3_2, casa3_3, casa3_4, casa3_5, casa3_6, casa3_7, casa3_8, casa3_9,casa3_10, casa3_11, casa3_12, casa3_13, casa3_14, casa3_15, casa3_16, casa3_17, casa3_18,casa3_19, casa3_10, casa3_21, casa3_22, casa3_23, casa3_24, casa3_25],
-        price: "$300,000",
-        location: "Medellín, Colombia",
-        rooms: 4,
-        agentPhone: "1122334455",
+        price: "3200millones - 1.400.000 admin",
+        location: "Cerritos Pereira",
+        description: "un área de tres mil setecientos metros cuadrados (3.700) mts² y un área construida de novecientos metros cuadrados (900) mts². La primer (1) planta cuenta con dos (2) alcobas con closet, un (1) estudio, un (1) baño completo, sala, comedor, baño social, cocina integral, zona de ropas, alcoba de servicio con baño, parqueadero cubierto para tres (3) automóviles y descubierto para diez (10) automóviles. La segunda planta consta de tres (3) alcobas, principal con vestier, baño privado y balcón, closet en madera, baño social completo y dos (2) balcones. La casa campestre cuenta con piscina, dos (2) jacuzzis, zona BBQ y zonas verdes. Sector con servicio de transporte público, cerca de colegios, restaurantes y parques.",
+        agentPhone: "3219536912",
       },
     ];
     setProperties(fakeData);
@@ -154,7 +154,7 @@ function Properties() {
             <div className="property-info">
               <p><strong>Precio:</strong> {property.price}</p>
               <p><strong>Ubicación:</strong> {property.location}</p>
-              <p><strong>Habitaciones:</strong> {property.rooms}</p>
+              <p><strong>descripcion:</strong> {property.description}</p>
               <a href={`https://wa.me/${property.agentPhone}`} target="_blank" rel="noopener noreferrer" className="whatsapp-button">
                 <FaWhatsapp /> Contactar
               </a>

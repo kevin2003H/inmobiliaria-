@@ -155,7 +155,7 @@ function Home() {
           <div className="property-card" onClick={() => handleOpenModal({
             title: 'Casa campestre para la renta, ubicada en Cerritos Pereira',
             description: 'con un área de tres mil setecientos metros cuadrados (3.700) mts² y un área construida de novecientos metros cuadrados (900) mts². La primer (1) planta cuenta con dos (2) alcobas con closet, un (1) estudio, un (1) baño completo, sala, comedor, baño social, cocina integral, zona de ropas, alcoba de servicio con baño, parqueadero cubierto para tres (3) automóviles y descubierto para diez (10) automóviles. La segunda planta consta de tres (3) alcobas, principal con vestier, baño privado y balcón, closet en madera, baño social completo y dos (2) balcones. La casa campestre cuenta con piscina, dos (2) jacuzzis, zona BBQ y zonas verdes. Sector con servicio de transporte público, cerca de colegios, restaurantes y parques.',
-            price: '3200millones - 1.400.000 admon',
+            price: '3200millones - ',
             images: [casa3_1, casa3_2, casa3_3, casa3_4, casa3_5, casa3_6, casa3_7, casa3_8, casa3_9, casa3_10, casa3_11, casa3_12, casa3_13, casa3_14,casa3_15,casa3_16,casa3_17,casa3_18,casa3_19,casa3_20,casa3_21,casa3_22,casa3_23,casa3_24,casa3_25],
           })}>
             <Swiper navigation={true} modules={[Navigation]} className="swiper-container">
