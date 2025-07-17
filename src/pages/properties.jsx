@@ -1,176 +1,350 @@
 import React, { useState, useEffect } from "react";
-import { FaWhatsapp } from "react-icons/fa";
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
-import "swiper/css/navigation";
-import { Navigation } from "swiper/modules";
+import { FaWhatsapp, FaMapMarkerAlt, FaMoneyBillWave, FaExpand, FaEdit, FaTrash } from "react-icons/fa";
+import { collection, getDocs, query, where, deleteDoc, doc } from "firebase/firestore";
+import { db, auth } from "../firebase";
+import CarruselImagenes from "../components/CarruselImagenes";
+import { useNavigate } from "react-router-dom";
 import "../index.css";
-
-import casa1_1 from '../assets/casa1-1.jpeg';
-import casa1_2 from '../assets/casa1-2.jpeg';
-import casa1_3 from '../assets/casa1-3.jpeg';
-import casa1_4 from '../assets/casa1-4.jpeg';
-import casa1_5 from '../assets/casa1-5.jpeg';
-import casa1_6 from '../assets/casa1-6.jpeg';
-import casa1_7 from '../assets/casa1-7.jpeg';
-import casa1_8 from '../assets/casa1-8.jpeg';
-import casa1_9 from '../assets/casa1-9.jpeg';
-import casa1_10 from '../assets/casa1-10.jpeg';
-import casa1_11 from '../assets/casa1-11.jpeg';
-import casa1_12 from '../assets/casa1-12.jpeg';
-
-
-import casa2_1 from '../assets/casa2-1.jpeg';
-import casa2_2 from '../assets/casa2-2.jpeg';
-import casa2_3 from '../assets/casa2-3.jpeg';
-import casa2_4 from '../assets/casa2-4.jpeg';
-import casa2_5 from '../assets/casa2-5.jpeg';
-import casa2_6 from '../assets/casa2-6.jpeg';
-import casa2_7 from '../assets/casa2-7.jpeg';
-import casa2_8 from '../assets/casa2-8.jpeg';
-import casa2_9 from '../assets/casa2-9.jpeg';
-
-import casa3_1 from '../assets/casa3-1.jpeg';
-import casa3_2 from '../assets/casa3-2.jpeg';
-import casa3_3 from '../assets/casa3-3.jpeg';
-import casa3_4 from '../assets/casa3-4.jpeg';
-import casa3_5 from '../assets/casa3-5.jpeg';
-import casa3_6 from '../assets/casa3-6.jpeg';
-import casa3_7 from '../assets/casa3-7.jpeg';
-import casa3_8 from '../assets/casa3-8.jpeg';
-import casa3_9 from '../assets/casa3-9.jpeg';
-import casa3_10 from '../assets/casa3-10.jpeg';
-import casa3_11 from '../assets/casa3-11.jpeg';
-import casa3_12 from '../assets/casa3-12.jpeg';
-import casa3_13 from '../assets/casa3-13.jpeg';
-import casa3_14 from '../assets/casa3-14.jpeg';
-import casa3_15 from '../assets/casa3-15.jpeg';
-import casa3_16 from '../assets/casa3-16.jpeg';
-import casa3_17 from '../assets/casa3-17.jpeg';
-import casa3_18 from '../assets/casa3-18.jpeg';
-import casa3_19 from '../assets/casa3-19.jpeg';
-import casa3_20 from '../assets/casa3-20.jpeg';
-import casa3_21 from '../assets/casa3-21.jpeg';
-import casa3_22 from '../assets/casa3-22.jpeg';
-import casa3_23 from '../assets/casa3-23.jpeg';
-import casa3_24 from '../assets/casa3-24.jpeg';
-import casa3_25 from '../assets/casa3-25.jpeg';
-
-// Componente Modal
-// Componente Modal (solo si lo necesitas, pero ahora ya no lo usaremos en el contenedor de propiedades)
-const Modal = ({ isOpen, onClose, property }) => {
-  if (!isOpen) return null; // Si el modal no está abierto, no se renderiza
-
-  return (
-    <div className="modal-overlay" onClick={onClose}>
-      <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-        <button className="close-btn" onClick={onClose}>X</button>
-        <h2>{property.title}</h2>
-        <Swiper navigation={true} modules={[Navigation]} className="swiper-container">
-          {property.images.map((image, index) => (
-            <SwiperSlide key={index}>
-              <img src={image} alt={`${property.title} - Foto ${index + 1}`} className="modal-image" />
-            </SwiperSlide>
-          ))}
-        </Swiper>
-        <p><strong>Precio:</strong> {property.price}</p>
-        <p><strong>Ubicación:</strong> {property.location}</p>
-        <p><strong>descripcion:</strong> {property.description}</p>
-        <a href={`https://wa.me/${property.agentPhone}`} target="_blank" rel="noopener noreferrer" className="whatsapp-button">
-          Contactar
-        </a>
-      </div>
-    </div>
-  );
-};
 
 function Properties() {
   const [properties, setProperties] = useState([]);
-  const [isModalOpen, setIsModalOpen] = useState(false); // Estado para el modal
-  const [selectedProperty, setSelectedProperty] = useState(null); // Propiedad seleccionada para el modal
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedProperty, setSelectedProperty] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  // Simulación de datos
+  // Galería de imágenes para el modal
+  const [galleryOpen, setGalleryOpen] = useState(false);
+  const [galleryIndex, setGalleryIndex] = useState(0);
+
+  // Estado para saber si mostrar botones de editar/eliminar
+  const [user, setUser] = useState(null);
+  const navigate = useNavigate();
+
   useEffect(() => {
-    const fakeData = [
-      {
-        id: 1,
-        title: "Casa campestre ubicada en Cerritos Pereira",
-        images: [casa1_1, casa1_2, casa1_3, casa1_4, casa1_5, casa1_6, casa1_7, casa1_8, casa1_9, casa1_10, casa1_11, casa1_12],
-        price: "",
-        location: "Casa campestre ubicada en Cerritos Pereira",
-        description:"",
-        agentPhone: "573219536912",
-      },
-      {
-        id: 2,
-        title: "Casa campestre ubicada en Cerritos Pereira",
-        images: [casa2_1, casa2_2, casa2_3, casa2_4, casa2_5, casa2_6, casa2_7, casa2_8, casa2_9],
-        price: "Precio venta: $1.700MM - Pago Adm $560.000 - predial año 2024 $130.000",
-        location: "Cerritos Pereira",
-        description:"Estrato 6. Gas natural, agua de Aguas y Aguas, Energía de Pereira, internet y tv por Claro Satelital, Dos pisos independientes: Primer piso: tres habitaciones dos baños, sala comedor, cocina integral, alacena y zona de ropas y para elsegundo piso:dos habitaciones, dos baños, sala comedor, cocina integral y zona de ropas , cuenta tambien con Parqueadero para dos carros, jacuzzi y amílicas zonas verdes " ,
-        agentPhone: "573219536912",
-      },
-      {
-        id: 3,
-        title: "Casa campestre para la renta, ubicada en Cerritos Pereira",
-        images: [casa3_1, casa3_2, casa3_3, casa3_4, casa3_5, casa3_6, casa3_7, casa3_8, casa3_9,casa3_10, casa3_11, casa3_12, casa3_13, casa3_14, casa3_15, casa3_16, casa3_17, casa3_18,casa3_19, casa3_10, casa3_21, casa3_22, casa3_23, casa3_24, casa3_25],
-        price: "3200millones - 1.400.000 admin",
-        location: "Cerritos Pereira",
-        description: "un área de tres mil setecientos metros cuadrados (3.700) mts² y un área construida de novecientos metros cuadrados (900) mts². La primer (1) planta cuenta con dos (2) alcobas con closet, un (1) estudio, un (1) baño completo, sala, comedor, baño social, cocina integral, zona de ropas, alcoba de servicio con baño, parqueadero cubierto para tres (3) automóviles y descubierto para diez (10) automóviles. La segunda planta consta de tres (3) alcobas, principal con vestier, baño privado y balcón, closet en madera, baño social completo y dos (2) balcones. La casa campestre cuenta con piscina, dos (2) jacuzzis, zona BBQ y zonas verdes. Sector con servicio de transporte público, cerca de colegios, restaurantes y parques.",
-        agentPhone: "573219536912",
-      },
-    ];
-    setProperties(fakeData);
+    const unsubscribe = auth.onAuthStateChanged((firebaseUser) => {
+      setUser(firebaseUser);
+    });
+    return () => unsubscribe();
   }, []);
 
-  // Función para abrir el modal con la propiedad seleccionada
+  useEffect(() => {
+    const fetchProperties = async () => {
+      setLoading(true);
+      // Leer filtros desde localStorage
+      const search = localStorage.getItem("search") || "";
+      const tipoFiltro = localStorage.getItem("tipoFiltro") || "";
+      let q = collection(db, "propiedades");
+      let filters = [];
+
+      if (search.trim()) {
+        filters.push(where("ubicacion", ">=", search));
+        filters.push(where("ubicacion", "<=", search + "\uf8ff"));
+      }
+      if (tipoFiltro) {
+        filters.push(where("tipo", "==", tipoFiltro));
+      }
+      if (filters.length > 0) {
+        q = query(collection(db, "propiedades"), ...filters);
+      }
+      try {
+        const querySnapshot = await getDocs(q);
+        const propiedades = querySnapshot.docs.map(doc => ({
+          id: doc.id,
+          ...doc.data()
+        }));
+        setProperties(propiedades);
+      } catch (error) {
+        console.error("Error fetching properties:", error);
+      } finally {
+        setLoading(false);
+        // Limpiar filtros después de usarlos
+        localStorage.removeItem("search");
+        localStorage.removeItem("tipoFiltro");
+        localStorage.removeItem("modoPropiedades");
+      }
+    };
+    fetchProperties();
+  }, []);
+
   const openModal = (property) => {
-    setSelectedProperty(property); // Establecer la propiedad seleccionada
-    setIsModalOpen(true); // Abrir el modal
+    setSelectedProperty(property);
+    setIsModalOpen(true);
   };
 
-  // Función para cerrar el modal
   const closeModal = () => {
-    setIsModalOpen(false); // Cerrar el modal
+    setIsModalOpen(false);
+    setGalleryOpen(false);
   };
+
+  // Abrir galería al hacer click en imagen del carrusel
+  const handleImageClick = (idx) => {
+    setGalleryIndex(idx);
+    setGalleryOpen(true);
+  };
+
+  // Eliminar propiedad
+  const handleEliminar = async (id) => {
+    if (window.confirm("¿Seguro que deseas eliminar esta propiedad?")) {
+      await deleteDoc(doc(db, "propiedades", id));
+      setProperties(properties.filter(p => p.id !== id));
+    }
+  };
+
+  // Editar propiedad
+  const handleEditar = (property) => {
+    // Guardar datos en localStorage para el formulario de edición
+    localStorage.setItem("editPropiedad", JSON.stringify(property));
+    navigate("/agregar-propiedad");
+  };
+
+  if (loading) {
+    return (
+      <div className="loading-container">
+        <div className="loading-spinner"></div>
+        <p>Cargando propiedades...</p>
+      </div>
+    );
+  }
 
   return (
-    <div className="properties-container">
-      <h2>Propiedades disponibles</h2>
-      <div className="properties-grid">
-        {properties.map((property) => (
-          <div key={property.id} className="property-card">
-            <h3>{property.title}</h3>
-
-            {/* Swiper para deslizar las imágenes dentro de la tarjeta */}
-            <Swiper navigation={true} modules={[Navigation]} className="swiper-container">
-              {property.images.map((image, index) => (
-                <SwiperSlide key={index}>
-                  <img src={image} alt={`${property.title} - Foto ${index + 1}`} className="property-image" />
-                </SwiperSlide>
-              ))}
-            </Swiper>
-
-            <div className="property-info">
-              <p><strong>Precio:</strong> {property.price}</p>
-              <p><strong>Ubicación:</strong> {property.location}</p>
-              <p><strong>descripcion:</strong> {property.description}</p>
-              <a href={`https://wa.me/${property.agentPhone}`} target="_blank" rel="noopener noreferrer" className="whatsapp-button">
-                <FaWhatsapp /> Contactar
-              </a>
-              {/* Botón para abrir el modal (si lo necesitas) */}
-              <button onClick={() => openModal(property)} className="details-button">Ver más</button>
+    <div className="properties-page">
+      <div className="hero-section">
+        <div className="hero-content">
+          <h1>Descubre tu propiedad ideal</h1>
+          <p>Encuentra el hogar perfecto entre nuestra selección exclusiva</p>
+        </div>
+      </div>
+      
+      <div className="properties-container">
+        <div className="section-header">
+          <h2>Propiedades destacadas</h2>
+          <p>Explora nuestra selección de propiedades cuidadosamente seleccionadas</p>
+        </div>
+        
+        <div className="properties-grid">
+          {properties.map((property) => {
+            // Mostrar botones solo si hay sesión iniciada
+            const mostrarBotones = !!user;
+            return (
+              <div key={property.id} className="property-card">
+                <div className="property-badge">
+                  {property.tipo || 'En venta'}
+                </div>
+                
+                <div className="property-image-container">
+                  <CarruselImagenes
+                    imagenes={property.imagenes}
+                    onImageClick={idx => {
+                      openModal(property);
+                      setGalleryIndex(idx);
+                      setGalleryOpen(true);
+                    }}
+                  />
+                  <button 
+                    className="expand-button"
+                    onClick={() => openModal(property)}
+                  >
+                    <FaExpand />
+                  </button>
+                </div>
+                
+                <div className="property-content">
+                  <h3>{property.titulo || 'Propiedad sin título'}</h3>
+                  
+                  <div className="property-description">
+                    {property.descripcionCorta || property.descripcion?.substring(0, 100) + '...'}
+                  </div>
+                  
+                  <div className="property-features">
+                    <div className="feature">
+                      <FaMapMarkerAlt className="feature-icon" />
+                      <span>{property.ubicacion || 'Ubicación no especificada'}</span>
+                    </div>
+                    <div className="feature">
+                      <FaMoneyBillWave className="feature-icon" />
+                      <span className="price">{property.precio || 'Consultar precio'}</span>
+                    </div>
+                    <div className="feature">
+                      <span className="feature-label">Habitaciones:</span>
+                      <span>{property.habitaciones || 'N/A'}</span>
+                    </div>
+                    <div className="feature">
+                      <span className="feature-label">Baños:</span>
+                      <span>{property.banos || 'N/A'}</span>
+                    </div>
+                    <div className="feature">
+                      <span className="feature-label">Parqueaderos:</span>
+                      <span>{property.parqueaderos || 'N/A'}</span>
+                    </div>
+                    <div className="feature">
+                      <span className="feature-label">Metros²:</span>
+                      <span>{property.metrosCuadrados || 'N/A'}</span>
+                    </div>
+                    <div className="feature">
+                      <span className="feature-label">Área privada:</span>
+                      <span>{property.areaPrivada || 'N/A'}</span>
+                    </div>
+                    <div className="feature">
+                      <span className="feature-label">Área construida:</span>
+                      <span>{property.areaConstruida || 'N/A'}</span>
+                    </div>
+                    <div className="feature">
+                      <span className="feature-label">Tipo:</span>
+                      <span>{property.tipo || 'N/A'}</span>
+                    </div>
+                  </div>
+                  
+                  <div className="property-actions">
+                    <a
+                      href={`https://wa.me/573219536912?text=Hola, estoy interesado en la propiedad ${property.titulo || ''}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="whatsapp-button"
+                    >
+                      <FaWhatsapp /> Contactar por WhatsApp
+                    </a>
+                    
+                    <button 
+                      onClick={() => openModal(property)} 
+                      className="details-button"
+                    >
+                      Ver detalles
+                    </button>
+                  </div>
+                  {/* Botones de editar/eliminar SOLO si hay sesión iniciada */}
+                  {mostrarBotones && (
+                    <div style={{ marginTop: 8, display: "flex", gap: 8 }}>
+                      <button
+                        className="edit-btn"
+                        style={{ background: "#457b9d", color: "#fff", borderRadius: 6, border: "none", padding: "0.4rem 0.8rem", cursor: "pointer" }}
+                        onClick={() => handleEditar(property)}
+                      >
+                        <FaEdit /> Editar
+                      </button>
+                      <button
+                        className="delete-btn"
+                        style={{ background: "#e63946", color: "#fff", borderRadius: 6, border: "none", padding: "0.4rem 0.8rem", cursor: "pointer" }}
+                        onClick={() => handleEliminar(property.id)}
+                      >
+                        <FaTrash /> Eliminar
+                      </button>
+                    </div>
+                  )}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+      
+      {/* Modal para más detalles */}
+      {isModalOpen && selectedProperty && (
+        <div className="modal-overlay" onClick={closeModal}>
+          <div className="modal-content" onClick={e => e.stopPropagation()}>
+            <button className="modal-close" onClick={closeModal}>×</button>
+            <h2>{selectedProperty.titulo || 'Detalles de la propiedad'}</h2>
+            <div className="modal-gallery">
+              <CarruselImagenes
+                imagenes={selectedProperty.imagenes}
+                onImageClick={idx => {
+                  setGalleryIndex(idx);
+                  setGalleryOpen(true);
+                }}
+              />
+            </div>
+            <div className="modal-details">
+              <div className="detail-section">
+                <h3>Descripción</h3>
+                <p>{selectedProperty.descripcion || 'No hay descripción disponible'}</p>
+              </div>
+              
+              <div className="detail-section">
+                <h3>Características</h3>
+                <div className="features-grid">
+                  <div className="feature-item">
+                    <span className="feature-label">Ubicación:</span>
+                    <span className="feature-value">{selectedProperty.ubicacion || 'No especificada'}</span>
+                  </div>
+                  <div className="feature-item">
+                    <span className="feature-label">Precio:</span>
+                    <span className="feature-value">{selectedProperty.precio || 'Consultar'}</span>
+                  </div>
+                  <div className="feature-item">
+                    <span className="feature-label">Habitaciones:</span>
+                    <span className="feature-value">{selectedProperty.habitaciones || 'N/A'}</span>
+                  </div>
+                  <div className="feature-item">
+                    <span className="feature-label">Baños:</span>
+                    <span className="feature-value">{selectedProperty.banos || 'N/A'}</span>
+                  </div>
+                  <div className="feature-item">
+                    <span className="feature-label">Parqueaderos:</span>
+                    <span className="feature-value">{selectedProperty.parqueaderos || 'N/A'}</span>
+                  </div>
+                  <div className="feature-item">
+                    <span className="feature-label">Metros²:</span>
+                    <span className="feature-value">{selectedProperty.metrosCuadrados || 'N/A'}</span>
+                  </div>
+                  <div className="feature-item">
+                    <span className="feature-label">Área privada:</span>
+                    <span className="feature-value">{selectedProperty.areaPrivada || 'N/A'}</span>
+                  </div>
+                  <div className="feature-item">
+                    <span className="feature-label">Área construida:</span>
+                    <span className="feature-value">{selectedProperty.areaConstruida || 'N/A'}</span>
+                  </div>
+                  <div className="feature-item">
+                    <span className="feature-label">Tipo:</span>
+                    <span className="feature-value">{selectedProperty.tipo || 'N/A'}</span>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="contact-section">
+                <a
+                  href={`https://wa.me/573219536912?text=Hola, estoy interesado en la propiedad ${selectedProperty.titulo || ''}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="whatsapp-button"
+                >
+                  <FaWhatsapp /> Contactar ahora
+                </a>
+              </div>
             </div>
           </div>
-        ))}
-      </div>
+        </div>
+      )}
 
-      {/* Modal */}
-      <Modal 
-        isOpen={isModalOpen} 
-        onClose={closeModal} 
-        property={selectedProperty} 
-      />
+      {/* Visor de galería de imágenes tipo lightbox */}
+      {galleryOpen && selectedProperty && (
+        <div className="gallery-overlay" onClick={() => setGalleryOpen(false)}>
+          <div className="gallery-content" onClick={e => e.stopPropagation()}>
+            <button className="gallery-close-btn" onClick={() => setGalleryOpen(false)}>×</button>
+            <img
+              src={selectedProperty.imagenes[galleryIndex]}
+              alt={`Imagen ${galleryIndex + 1}`}
+              className="gallery-image"
+            />
+            <div className="gallery-controls">
+              <button
+                onClick={() => setGalleryIndex((galleryIndex - 1 + selectedProperty.imagenes.length) % selectedProperty.imagenes.length)}
+                className="gallery-nav-btn"
+              >
+                ‹
+              </button>
+              <span className="gallery-counter">
+                {galleryIndex + 1} / {selectedProperty.imagenes.length}
+              </span>
+              <button
+                onClick={() => setGalleryIndex((galleryIndex + 1) % selectedProperty.imagenes.length)}
+                className="gallery-nav-btn"
+              >
+                ›
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
