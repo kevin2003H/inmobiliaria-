@@ -245,7 +245,7 @@ nav .login {
   }
   
 body {
-  padding-top: 48px; /* Desktop: igual al alto del header */
+  padding-top: 60px; /* Desktop: igual al alto del header */
 }
 
 @media (max-width: 900px) {
@@ -256,7 +256,7 @@ body {
 
 @media (max-width: 600px) {
   body {
-    padding-top: 120px; /* Si el header crece aún más en móvil, aumenta este valor */
+    padding-top: 318px; /* Si el header crece aún más en móvil, aumenta este valor */
   }
 }
 
