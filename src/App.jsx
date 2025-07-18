@@ -13,7 +13,6 @@ import Login from './pages/login';
 import AgregarPropiedad from "./AgregarPropiedad";
 
 function AppWrapper() {
-  // Necesario para usar useNavigate fuera de App
   return (
     <Router>
       <App />
@@ -26,15 +25,9 @@ function App() {
   const [search, setSearch] = useState("");
   const [tipoFiltro, setTipoFiltro] = useState("");
   const [filterModalOpen, setFilterModalOpen] = useState(false);
-
-  // Nuevo estado para ubicación en el filtro
   const [ubicacionFiltro, setUbicacionFiltro] = useState("");
-
-  // Galería de imágenes
   const [galleryOpen, setGalleryOpen] = useState(false);
   const [galleryIndex, setGalleryIndex] = useState(0);
-
-  // Modal de propiedad (para vista previa rápida)
   const [modalPropiedad, setModalPropiedad] = useState(null);
 
   const navigate = useNavigate();
@@ -46,29 +39,21 @@ function App() {
     return () => unsubscribe();
   }, []);
 
-  // Buscar propiedades por ubicación y tipo
   const handleSearch = (e) => {
     if (e) e.preventDefault();
-    // Si se usa el filtro modal, usar ubicacionFiltro, si no, usar search
     const ubicacion = filterModalOpen ? ubicacionFiltro : search;
     if (!ubicacion.trim() && !tipoFiltro) return;
-
-    // Guardar filtros en localStorage para usarlos en Properties
     localStorage.setItem("search", ubicacion);
     localStorage.setItem("tipoFiltro", tipoFiltro);
-
-    // Redirigir a /properties
     navigate("/properties");
     setFilterModalOpen(false);
   };
 
-  // Limpiar filtros
   const clearFilters = () => {
     setTipoFiltro("");
     setUbicacionFiltro("");
   };
 
-  // Navegación programática para el botón del modal
   const navigateToProperties = () => {
     setModalPropiedad(null);
     window.location.href = "/properties";
@@ -78,22 +63,20 @@ function App() {
     <div>
       {/* Header con navegación */}
       <header>
-        <h1>
-          <Link to="/" className="logo-container">
-            <img src={logo} alt="Carmona Inmobiliaria" style={{ height: '50px', width: 'auto' }} />
+        {/* Fila superior: logo + search + filtro + social + login (en móvil) */}
+        <div className="header-row-top" style={{ display: "flex", alignItems: "center", gap: "0.5rem", width: "100%" }}>
+          <Link to="/" className="logo-container" style={{ display: "flex", alignItems: "center", marginRight: "0.12rem" }}>
+            <img src={logo} alt="Carmona Inmobiliaria" style={{ height: '32px', width: 'auto' }} />
           </Link>
-        </h1>
-
-        {/* Barra de búsqueda y botón de filtro */}
-        <div className="search-bar" style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
-          <form onSubmit={handleSearch} style={{ display: "flex", gap: "0.5rem", alignItems: "center" }}>
+          <form className="search-bar" onSubmit={handleSearch} style={{ flex: 1, display: "flex", alignItems: "center", maxWidth: 180, minWidth: 70, background: "#fff", borderRadius: "0.8rem", padding: "0.04rem 0.08rem 0.04rem 0.12rem", margin: 0 }}>
             <input
               type="text"
-              placeholder="Buscar propiedades por ubicación..."
+              placeholder=" propiedad por ubicacion"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
+              style={{ fontSize: "0.95rem", padding: "0.3rem 0.2rem", border: "none", outline: "none", background: "transparent", width: "100%" }}
             />
-            <button type="submit">🔍</button>
+            <button type="submit" style={{ background: "none", border: "none", fontSize: "1.1rem", cursor: "pointer", padding: "0.2rem" }}>🔍</button>
           </form>
           <button
             type="button"
@@ -102,18 +85,33 @@ function App() {
               background: "#f1faee",
               border: "none",
               borderRadius: "50%",
-              padding: "0.5rem",
-              marginLeft: "0.5rem",
+              padding: "0.22rem",
+              marginLeft: "0.08rem",
               cursor: "pointer",
-              boxShadow: "0 2px 8px rgba(69,123,157,0.07)"
+              boxShadow: "0 2px 8px rgba(69,123,157,0.07)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center"
             }}
             title="Filtrar por tipo de propiedad"
             onClick={() => setFilterModalOpen(true)}
           >
             <FaFilter style={{ color: "#457b9d", fontSize: 22 }} />
           </button>
+          {/* Redes sociales al lado derecho del filtro */}
+          <div className="social-media" style={{ display: "flex", alignItems: "center", gap: "0.5rem", marginLeft: "0.5rem" }}>
+            <a href="https://wa.me/573219536912" target="_blank" rel="noopener noreferrer">
+              <FaWhatsapp className="icon whatsapp" />
+            </a>
+            <a href="https://instagram.com/carmona_inmobiliaria" target="_blank" rel="noopener noreferrer">
+              <FaInstagram className="icon instagram" />
+            </a>
+            {/* Botón Ingresar SOLO visible en móvil */}
+            <Link to="/login" className="login mobile-login">Ingresar</Link>
+          </div>
         </div>
 
+        {/* Navegación */}
         <nav>
           <div className="right-links">
             <Link to="/">Inicio</Link>
@@ -122,18 +120,9 @@ function App() {
             <Link to="/about">Conócenos</Link>
             {user && <Link to="/agregar-propiedad">Agregar Propiedad</Link>}
           </div>
-          <Link to="/login" className="login">Ingresar</Link>
+          {/* Botón Ingresar SOLO visible en escritorio */}
+          {/* <Link to="/login" className="login">Ingresar</Link> */}
         </nav>
-
-        <div className="social-media">
-          <span>contactanos:</span>
-          <a href="https://wa.me/573219536912" target="_blank" rel="noopener noreferrer">
-            <FaWhatsapp className="icon whatsapp" />
-          </a>
-          <a href="https://instagram.com/carmona_inmobiliaria" target="_blank" rel="noopener noreferrer">
-            <FaInstagram className="icon instagram" />
-          </a>
-        </div>
       </header>
 
       {/* Modal de filtro */}

@@ -75,7 +75,7 @@ body {
   margin: 0;
   padding: 0;
   line-height: 1.6;
-  padding-top: 100px; /* Espacio para el header fijo */
+  padding-top: 48px; /* Espacio para el header fijo */
 }
 
 header {
@@ -118,35 +118,33 @@ header {
 nav {
   display: flex;
   align-items: center;
-  gap: 1.2rem;
+  justify-content: center; /* <-- centra los enlaces horizontalmente */
+  gap: 2.5rem;             /* <-- aumenta el espacio entre los grupos de enlaces */
   flex: 1;
-  justify-content: center;
 }
 
 .right-links {
   display: flex;
-  gap: 1.2rem;
+  gap: 2rem;                /* <-- aumenta el espacio entre cada enlace */
+  justify-content: center;  /* <-- centra los enlaces dentro del grupo */
+  align-items: center;
 }
 
-header nav a {
+header nav a,
+header .login {
   color: #fff;
   text-decoration: none;
   font-weight: 500;
   font-size: 1rem;
-  padding: 0.4rem 0.9rem;
+  padding: 0.4rem 1.1rem;   /* <-- más espacio horizontal en cada enlace */
   border-radius: 6px;
   transition: background 0.2s, color 0.2s;
+  display: inline-block;
 }
 
-header nav a:hover,
-header nav .login:hover {
-  background: #fff;
-  color: #646cff;
-  box-shadow: 0 2px 8px rgba(100,108,255,0.10);
-}
 
 nav .login {
-  margin-left: 1.2rem;
+  margin-left: 5rem;
   color: #ffd700;
   font-weight: bold;
   background: transparent;
@@ -236,46 +234,102 @@ nav .login {
 }
 
 /* Responsive */
-@media (max-width: 900px) {
+@media (max-width: 600px) {
   header {
+    display: flex;
     flex-direction: column;
     align-items: stretch;
-    padding: 0.4rem 0.5rem;
-    min-height: 0;
+    padding: 0.18rem 0.18rem 0.12rem 0.18rem !important;
+    min-height: unset !important;
+    box-shadow: 0 2px 8px rgba(100,108,255,0.10);
+    background: linear-gradient(90deg, #646cff 60%, #535bf2 100%);
+    position: fixed;
+    width: 100vw;
+    top: 0;
+    left: 0;
+    z-index: 1000;
   }
-  
-body {
-  padding-top: 60px; /* Desktop: igual al alto del header */
-}
-
-@media (max-width: 900px) {
-  body {
-    padding-top: 330px; /* Ajusta según el alto real del header en tablet */
+  h1 {
+    margin: 0;
+    padding: 0;
   }
-}
-
-@media (max-width: 600px) {
-  body {
-    padding-top: 318px; /* Si el header crece aún más en móvil, aumenta este valor */
+  .logo-container img {
+    height: 35px !important;
+    margin-right: 0.18rem !important;
+    vertical-align: middle;
   }
-}
-
-  nav {
-    flex-direction: column;
-    gap: 0.7rem;
-    margin-top: 0.3rem;
-  }
-  .right-links {
-    gap: 0.7rem;
+  .logo-container {
+    display: flex;
+    align-items: center;
+    font-size: 1rem !important;
+    margin-right: 0.2rem !important;
   }
   .search-bar {
-    margin: 0.5rem 0;
+    flex: 1;
+    max-width: 140px !important;
+    min-width: 70px !important;
+    margin: 0 0.1rem !important;
+    padding: 0.04rem 0.08rem 0.04rem 0.12rem !important;
+    border-radius: 0.8rem;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    background: #fff;
+    gap: 0.2rem;
+  }
+  .filter-btn {
+    padding: 0.3rem !important;
+    margin-left: 0.1rem !important;
+    font-size: 1rem !important;
+  }
+  /* Agrupa logo, search y filtro en una fila */
+  header > h1,
+  header > .search-bar {
+    display: inline-flex;
+    vertical-align: middle;
+  }
+  header > h1 {
+    margin-right: 0.2rem;
+  }
+  /* Navegación compacta y con scroll si es necesario */
+  nav {
+    display: flex;
+    flex-direction: row !important;
+    gap: 0.18rem !important;
+    margin: 0.12rem 0 0.08rem 0 !important;
+    overflow-x: auto;
+    align-items: center !important;
     width: 100%;
-    max-width: 100%;
+    scrollbar-width: none;
+  }
+  nav::-webkit-scrollbar {
+    display: none;
+  }
+  .right-links {
+    display: flex;
+    gap: 0.18rem !important;
+    flex-wrap: nowrap;
+  }
+  header nav a,
+  .login {
+    font-size: 0.78rem !important;
+    padding: 0.13rem 0.22rem !important;
+    white-space: nowrap;
   }
   .social-media {
-    justify-content: center;
-    margin-top: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.12rem !important;
+    justify-content: flex-start;
+    margin-top: 0.08rem !important;
+    font-size: 0.9rem;
+  }
+  .icon {
+    font-size: 1.1rem !important;
+    padding: 0.15rem !important;
+  }
+  body {
+    padding-top: 70px !important; /* Ajusta según el alto real del header en móvil */
   }
 }
 
@@ -295,6 +349,130 @@ body {
   }
 }
 
+/* --- Ajuste de navegación en header para escritorio --- */
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;      /* Centra horizontalmente el grupo de enlaces */
+  gap: 3rem;                    /* Espacio entre right-links y login */
+  flex: 1;
+  width: 100%;
+}
+
+.right-links {
+  display: flex;
+  gap: 2.2rem;                  /* Más espacio entre cada enlace */
+  justify-content: center;      /* Centra los enlaces dentro del grupo */
+  align-items: center;
+  width: 100%;
+}
+
+
+
+/* --- Diseño moderno para enlaces de navegación --- */
+header nav a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1rem;
+  padding: 0.4rem 1.2rem;
+  border-radius: 8px;
+  margin: 0 0.2rem;
+  position: relative;
+  transition: background 0.22s, color 0.22s, box-shadow 0.22s;
+  display: inline-block;
+  z-index: 1;
+}
+
+header nav a:hover,
+header nav a:focus {
+  background: #fff;
+  color: #646cff;
+  box-shadow: 0 2px 12px rgba(100,108,255,0.13);
+  text-decoration: none;
+}
+
+header nav a.active,
+header nav a[aria-current="page"] {
+  background: #ffd700;
+  color: #333;
+  font-weight: 700;
+  box-shadow: 0 2px 12px rgba(255,215,0,0.13);
+}
+
+/* Separador visual entre enlaces (menos el último) */
+.right-links a:not(:last-child)::after {
+  content: "";
+  display: inline-block;
+  width: 1.5px;
+  height: 22px;
+  background: rgba(255,255,255,0.18);
+  margin-left: 0.7rem;
+  margin-right: 0.7rem;
+  vertical-align: middle;
+  border-radius: 2px;
+}
+
+/* Botón Ingresar destacado y separado */
+header .login {
+  margin-left: 2.2rem;
+  color: #ffd700;
+  font-weight: bold;
+  background: transparent;
+  border: 1.5px solid #ffd700;
+  padding: 0.4rem 1.1rem;
+  border-radius: 8px;
+  transition: background 0.2s, color 0.2s;
+  display: inline-block;
+}
+
+header .login:hover,
+header .login:focus {
+  background: #ffd700;
+  color: #333;
+  box-shadow: 0 2px 12px rgba(255,215,0,0.13);
+  text-decoration: none;
+}
+
+/* --- Responsive para móvil --- */
+@media (max-width: 600px) {
+  nav {
+    display: flex;
+    flex-direction: row !important;
+    gap: 0.18rem !important;
+    margin: 0.12rem 0 0.08rem 0 !important;
+    overflow-x: auto;
+    align-items: center !important;
+    width: 100%;
+    scrollbar-width: none;
+    justify-content: flex-start !important;
+  }
+  .right-links {
+    gap: 0.5rem !important;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+  }
+  header nav a {
+    font-size: 0.95rem;
+    padding: 0.3rem 0.6rem;
+    margin: 0 0.1rem;
+    border-radius: 7px;
+    min-width: max-content;
+  }
+  .right-links a:not(:last-child)::after {
+    width: 1px;
+    height: 16px;
+    margin-left: 0.3rem;
+    margin-right: 0.3rem;
+  }
+  header .login {
+    margin-left: 0.5rem;
+    font-size: 0.95rem;
+    padding: 0.3rem 0.7rem;
+    border-radius: 7px;
+    min-width: max-content;
+  }
+}
 /* ****************************************Home************************************************/
 /* index.css */
 /* home-container */
@@ -524,16 +702,25 @@ body {
 
 
 /* Hacer las propiedades más pequeñas en pantallas más pequeñas */
-@media (max-width: 768px) {
+/* En móvil, que ocupen casi todo el ancho pero sigan centradas */
+@media (max-width: 600px) {
   .properties-container {
     flex-direction: column;
     align-items: center;
+    gap: 1.2rem;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    width: 100vw !important;
+    margin-left: auto;
+    margin-right: auto;
   }
   .property-card {
-    width: 90%;
+    width: 96vw !important;
+    min-width: unset !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
   }
 }
-
 /* Ajuste del header y logo en pantallas pequeñas */
 @media (max-width: 768px) {
   .home-logo {
@@ -541,18 +728,23 @@ body {
     margin-bottom: 10px;
   }
 
+@media (max-width: 600px) {
   .home-container {
-    height: auto; /* Permitimos que crezca según el contenido */
-    padding: 1rem;
-    text-align: center;
-    /* margin-top: 170px; */
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    width: 100vw !important;
+    box-sizing: border-box;
   }
-
   .content {
-    padding: 1rem;
-    width: 100%;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    width: 100vw !important;
+    margin: 0 auto !important;
+    box-sizing: border-box;
+    align-items: center !important;
+    text-align: center !important;
   }
-
+}
   .content h2 {
     font-size: 1.4rem;
     margin: 10px 0;
@@ -1624,7 +1816,7 @@ body {
 /* Imagen del carrusel en el modal */
 .modal-content .property-image {
   width: 100%;
-  max-height: 260px;
+  max-height: 280px;
   object-fit: cover;
   border-radius: 1rem;
   margin-bottom: 1rem;
@@ -1952,7 +2144,7 @@ footer {
 
 .property-image {
   width: 100%;
-  max-height: 260px;
+  max-height: 290px;
   object-fit: cover;
   border-radius: 12px;
   margin-bottom: 1.2rem;
