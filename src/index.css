@@ -2210,3 +2210,140 @@ footer {
     font-size: 1.5rem;
   }
 }
+/* =================== Mejoras Responsive para Móvil =================== */
+
+/* General */
+body, html {
+  width: 100vw;
+  overflow-x: hidden;
+}
+
+/* Hero section */
+@media (max-width: 600px) {
+  .hero-section {
+    height: 180px;
+    padding: 0;
+    margin-bottom: 1.2rem;
+    background-position: center;
+  }
+  .hero-content {
+    padding: 1rem 0.5rem;
+  }
+  .hero-content h1 {
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+  }
+  .hero-content p {
+    font-size: 0.95rem;
+  }
+}
+
+/* Properties grid y cards */
+@media (max-width: 600px) {
+  .properties-grid {
+    grid-template-columns: 1fr;
+    gap: 1.2rem;
+    padding: 0 0.2rem;
+  }
+  .property-card {
+    width: 98vw;
+    min-width: unset;
+    margin: 0 auto 1.2rem auto;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(100,108,255,0.10);
+  }
+  .property-image-container {
+    height: 160px;
+  }
+  .property-content {
+    padding: 1rem 0.7rem;
+  }
+  .property-content h3 {
+    font-size: 1.1rem;
+  }
+  .property-description {
+    font-size: 0.93rem;
+  }
+  .property-features {
+    gap: 0.4rem;
+    font-size: 0.93rem;
+    padding-bottom: 0.7rem;
+  }
+  .property-actions {
+    gap: 0.5rem;
+  }
+}
+
+/* Modal */
+@media (max-width: 600px) {
+  .modal-content {
+    padding: 1rem 0.3rem 1rem 0.3rem;
+    max-width: 99vw;
+  }
+  .modal-gallery {
+    height: 120px;
+    margin: 0.5rem 0.2rem;
+  }
+  .modal-details {
+    padding: 0 0.2rem 0.7rem;
+  }
+  .features-grid {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+}
+
+/* Formulario de agregar propiedad */
+@media (max-width: 600px) {
+  .agregar-propiedad-container {
+    max-width: 99vw;
+    padding: 1rem 0.2rem;
+    margin: 70px auto 20px auto;
+  }
+  .agregar-propiedad-form label {
+    font-size: 0.98rem;
+  }
+  .agregar-propiedad-form input,
+  .agregar-propiedad-form select {
+    font-size: 0.98rem;
+    padding: 10px 8px;
+  }
+  .agregar-propiedad-form button {
+    font-size: 1rem;
+    padding: 12px;
+  }
+  .imagenes-preview img {
+    width: 48px;
+    height: 48px;
+  }
+}
+
+/* Perfil */
+@media (max-width: 600px) {
+  .perfil-container {
+    flex-direction: column;
+    gap: 12px;
+    padding: 1rem 0.3rem;
+    max-width: 99vw;
+    margin: 20px auto 0 auto;
+  }
+  .perfil-avatar {
+    width: 44px;
+    height: 44px;
+    font-size: 1.2rem;
+  }
+  .perfil-title {
+    font-size: 1.1rem;
+  }
+  .perfil-email {
+    font-size: 0.98rem;
+  }
+}
+
+/* Footer */
+@media (max-width: 600px) {
+  footer {
+    font-size: 0.95rem;
+    padding: 1rem 0.2rem;
+  }
+}
