@@ -14,21 +14,24 @@ const fondoImages = [fondo1, fondo2, fondo3, fondo4, fondo5];
 
 function Home() {
   const [backgroundImage, setBackgroundImage] = useState(fondoImages[0]);
+  const [currentIndex, setCurrentIndex] = useState(0);
   const [showModal, setShowModal] = useState(false);
   const [selectedProperty, setSelectedProperty] = useState(null);
   const [randomProperties, setRandomProperties] = useState([]);
 
-  // Cambia el fondo cada 4 segundos
+  // Cambia el fondo cada 4 segundos, precargando la imagen antes de mostrarla
   useEffect(() => {
     const interval = setInterval(() => {
-      setBackgroundImage((prev) => {
-        const currentIndex = fondoImages.indexOf(prev);
-        const nextIndex = (currentIndex + 1) % fondoImages.length;
-        return fondoImages[nextIndex];
-      });
+      const nextIndex = (currentIndex + 1) % fondoImages.length;
+      const nextImg = new window.Image();
+      nextImg.src = fondoImages[nextIndex];
+      nextImg.onload = () => {
+        setBackgroundImage(fondoImages[nextIndex]);
+        setCurrentIndex(nextIndex);
+      };
     }, 4000);
     return () => clearInterval(interval);
-  }, []);
+  }, [currentIndex]);
 
   // Carga 3 propiedades aleatorias de Firestore
   useEffect(() => {
@@ -115,36 +118,35 @@ function Home() {
         </div>
       </section>
       
-<section className="faq-section">
-  <h2>Preguntas Frecuentes</h2>
-  <div className="faq-list">
-    <div className="faq-item">
-      <strong>¿Cómo puedo agendar una visita?</strong>
-      <p>Puedes contactarnos por WhatsApp o a través del formulario de contacto y coordinaremos una cita.</p>
-    </div>
-    <div className="faq-item">
-      <strong>¿Qué documentos necesito para comprar o arrendar?</strong>
-      <p>Te asesoramos en todo el proceso y te indicamos los documentos necesarios según tu caso.</p>
-    </div>
-     </div>
-    </section>
+      <section className="faq-section">
+        <h2>Preguntas Frecuentes</h2>
+        <div className="faq-list">
+          <div className="faq-item">
+            <strong>¿Cómo puedo agendar una visita?</strong>
+            <p>Puedes contactarnos por WhatsApp o a través del formulario de contacto y coordinaremos una cita.</p>
+          </div>
+          <div className="faq-item">
+            <strong>¿Qué documentos necesito para comprar o arrendar?</strong>
+            <p>Te asesoramos en todo el proceso y te indicamos los documentos necesarios según tu caso.</p>
+          </div>
+        </div>
+      </section>
 
-
-   <section className="map-section">
-  <h2>¿Dónde estamos?</h2>
-  <div className="map-container">
-    <iframe
-      title="Ubicación Centro Comercial Palo de Agua"
-      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3977.417524259514!2d-75.7522441!3d4.7934083!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e387d0007d96a71%3A0x161b9bf56b3f7c12!2sMall%20Palo%20de%20Agua!5e0!3m2!1ses!2sco!4v1721140000000!5m2!1ses!2sco"
-      width="100%"
-      height="250"
-      style={{ border: 0, borderRadius: "12px" }}
-      allowFullScreen=""
-      loading="lazy"
-      referrerPolicy="no-referrer-when-downgrade"
-    ></iframe>
-  </div>
-</section>
+      <section className="map-section">
+        <h2>¿Dónde estamos?</h2>
+        <div className="map-container">
+          <iframe
+            title="Ubicación Centro Comercial Palo de Agua"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3977.417524259514!2d-75.7522441!3d4.7934083!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e387d0007d96a71%3A0x161b9bf56b3f7c12!2sMall%20Palo%20de%20Agua!5e0!3m2!1ses!2sco!4v1721140000000!5m2!1ses!2sco"
+            width="100%"
+            height="250"
+            style={{ border: 0, borderRadius: "12px" }}
+            allowFullScreen=""
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+          ></iframe>
+        </div>
+      </section>
 
       {/* Sección de Contacto Rápido */}
       <section className="contact-section">

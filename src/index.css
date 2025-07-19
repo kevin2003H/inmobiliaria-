@@ -2539,3 +2539,14 @@ body, html {
     padding: 1rem 0.2rem;
   }
 }
+
+.bg-img {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  transition: opacity 1s;
+  /* Puedes agregar pointer-events: none; si no quieres que interfiera con clics */
+}
