@@ -11,6 +11,7 @@ import Contact from './pages/contact';
 import AboutPage from './pages/about';
 import Login from './pages/login';
 import AgregarPropiedad from "./AgregarPropiedad";
+import OfrezcaPropiedad from "./OfrezcaPropiedad";
 
 function AppWrapper() {
   return (
@@ -29,6 +30,8 @@ function App() {
   const [galleryOpen, setGalleryOpen] = useState(false);
   const [galleryIndex, setGalleryIndex] = useState(0);
   const [modalPropiedad, setModalPropiedad] = useState(null);
+  const [propiedadesMenuOpen, setPropiedadesMenuOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 700);
 
   const navigate = useNavigate();
 
@@ -37,6 +40,12 @@ function App() {
       setUser(firebaseUser);
     });
     return () => unsubscribe();
+  }, []);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth <= 700);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   const handleSearch = (e) => {
@@ -115,7 +124,62 @@ function App() {
         <nav>
           <div className="right-links">
             <Link to="/">Inicio</Link>
-            <Link to="/properties">Propiedades</Link>
+            {/* Dropdown para Propiedades */}
+            <div
+              className="dropdown"
+              style={{ position: "relative", display: "inline-block" }}
+              onMouseEnter={!isMobile ? () => setPropiedadesMenuOpen(true) : undefined}
+              onMouseLeave={!isMobile ? () => setPropiedadesMenuOpen(false) : undefined}
+            >
+              <button
+                style={{
+                  background: "none",
+                  border: "none",
+                  font: "inherit",
+                  cursor: "pointer",
+                  color: "inherit",
+                  padding: 0,
+                }}
+                onClick={isMobile ? () => setPropiedadesMenuOpen((v) => !v) : undefined}
+              >
+                Propiedades ▼
+              </button>
+              {propiedadesMenuOpen && (
+                <div
+                  className="dropdown-content"
+                  style={{
+                    position: isMobile ? "fixed" : "absolute",
+                    top: isMobile ? 60 : "100%",
+                    left: isMobile ? 0 : 0,
+                    right: isMobile ? 0 : "auto",
+                    background: "#fff",
+                    boxShadow: "0 2px 16px #0003",
+                    borderRadius: 12,
+                    minWidth: isMobile ? "90vw" : 180,
+                    zIndex: 1000,
+                    padding: isMobile ? "1.2rem 1rem" : "0.5rem 0",
+                    margin: isMobile ? "0 auto" : 0,
+                    textAlign: isMobile ? "center" : "left",
+                    animation: isMobile ? "dropdownFadeIn 0.3s" : undefined,
+                  }}
+                >
+                  <Link
+                    to="/properties"
+                    style={{ display: "block", padding: "0.7rem 1rem", color: "#1d3557", textDecoration: "none", fontWeight: 600, fontSize: "1.1rem" }}
+                    onClick={() => setPropiedadesMenuOpen(false)}
+                  >
+                    🏠 Ver propiedades
+                  </Link>
+                  <Link
+                    to="/ofrezca-propiedad"
+                    style={{ display: "block", padding: "0.7rem 1rem", color: "#457b9d", textDecoration: "none", fontWeight: 600, fontSize: "1.1rem" }}
+                    onClick={() => setPropiedadesMenuOpen(false)}
+                  >
+                    ✍️ Ofrezca su propiedad
+                  </Link>
+                </div>
+              )}
+            </div>
             <Link to="/contact">Contacto</Link>
             <Link to="/about">Conócenos</Link>
             {user && <Link to="/agregar-propiedad">Agregar Propiedad</Link>}
@@ -318,6 +382,7 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/ofrezca-propiedad" element={<OfrezcaPropiedad />} />
         <Route
           path="/agregar-propiedad"
           element={
