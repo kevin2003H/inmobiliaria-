@@ -31,11 +31,12 @@ function Properties() {
     const fetchProperties = async () => {
       setLoading(true);
       // Leer filtros desde localStorage
-      const search = localStorage.getItem("search") || "";
-      const tipoFiltro = localStorage.getItem("tipoFiltro") || "";
+      const search = (localStorage.getItem("search") || "").toLowerCase();
+      const tipoFiltro = (localStorage.getItem("tipoFiltro") || "").toLowerCase();
       let q = collection(db, "propiedades");
       let filters = [];
 
+      // Solo filtra por Firestore si hay filtro exacto de tipo o ubicación
       if (search.trim()) {
         filters.push(where("ubicacion", ">=", search));
         filters.push(where("ubicacion", "<=", search + "\uf8ff"));
@@ -48,10 +49,25 @@ function Properties() {
       }
       try {
         const querySnapshot = await getDocs(q);
-        const propiedades = querySnapshot.docs.map(doc => ({
+        let propiedades = querySnapshot.docs.map(doc => ({
           id: doc.id,
           ...doc.data()
         }));
+
+        // --- FILTRO AVANZADO: buscar por ubicación o tipo desde el input ---
+        if (search.trim()) {
+          propiedades = propiedades.filter(
+            prop =>
+              (prop.ubicacion && prop.ubicacion.toLowerCase().includes(search)) ||
+              (prop.tipo && prop.tipo.toLowerCase().includes(search))
+          );
+        }
+        if (tipoFiltro) {
+          propiedades = propiedades.filter(
+            prop => prop.tipo && prop.tipo.toLowerCase() === tipoFiltro
+          );
+        }
+
         setProperties(propiedades);
       } catch (error) {
         console.error("Error fetching properties:", error);

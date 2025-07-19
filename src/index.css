@@ -79,7 +79,7 @@ body {
 }
 
 header {
-  background: linear-gradient(90deg, #646cff 60%, #535bf2 100%);
+    background: linear-gradient(90deg, #2563eb 0%, #3a86ff 100%);
   color: #fff;
   padding:  0.18rem 0.7rem;
   display: flex;
@@ -519,6 +519,12 @@ header .login:focus {
   margin-bottom: 17px;
 }
 
+.home-container h3 {
+  color: #2563eb; /* O el azul que prefieras */
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
 .content p {
   margin-top: -1.3rem; /* Ajuste específico para el párrafo */
 }
@@ -552,7 +558,7 @@ header .login:focus {
   margin-bottom: 0.5rem;
 }
 .service-card h3 {
-  color: #646cff;
+  color:  #2563eb;
   margin-bottom: 0.5rem;
 }
 
