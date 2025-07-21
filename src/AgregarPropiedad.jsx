@@ -5,7 +5,7 @@ import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { useNavigate } from "react-router-dom";
 
 function AgregarPropiedad() {
-  const [titulo, setTitulo] = useState(""); // Añade este estado para el título
+  const [titulo, setTitulo] = useState("");
   const [descripcion, setDescripcion] = useState("");
   const [precio, setPrecio] = useState("");
   const [ubicacion, setUbicacion] = useState("");
@@ -25,12 +25,11 @@ function AgregarPropiedad() {
 
   const navigate = useNavigate();
 
-  // Cargar datos si es edición
   useEffect(() => {
     const editData = localStorage.getItem("editPropiedad");
     if (editData) {
       const prop = JSON.parse(editData);
-      setTitulo(prop.titulo || ""); // Cargar el título si existe
+      setTitulo(prop.titulo || "");
       setDescripcion(prop.descripcion || "");
       setPrecio(prop.precio || "");
       setUbicacion(prop.ubicacion || "");
@@ -49,13 +48,18 @@ function AgregarPropiedad() {
     }
   }, []);
 
+  // Acumula imágenes seleccionadas y sus previews
   const handleImagenesChange = (e) => {
     const files = Array.from(e.target.files);
-    setImagenes(files);
-
-    // Crear URLs de vista previa
+    setImagenes(prev => [...prev, ...files]);
     const previews = files.map(file => URL.createObjectURL(file));
-    setPreviewUrls(previews);
+    setPreviewUrls(prev => [...prev, ...previews]);
+  };
+
+  // Eliminar una imagen seleccionada antes de guardar
+  const handleRemoveImagen = (idx) => {
+    setPreviewUrls(prev => prev.filter((_, i) => i !== idx));
+    setImagenes(prev => prev.filter((_, i) => i !== idx));
   };
 
   const handleSubmit = async (e) => {
@@ -78,7 +82,7 @@ function AgregarPropiedad() {
       }
 
       const data = {
-         titulo,
+        titulo,
         descripcion,
         precio,
         ubicacion,
@@ -94,18 +98,15 @@ function AgregarPropiedad() {
       };
 
       if (editId) {
-        // Actualizar propiedad existente
         const refDoc = doc(db, "propiedades", editId);
         await updateDoc(refDoc, data);
         alert("Propiedad actualizada!");
       } else {
-        // Crear nueva propiedad
         await addDoc(collection(db, "propiedades"), data);
         alert("Propiedad guardada!");
       }
 
-      // Limpiar formulario y navegar
-        setTitulo("");
+      setTitulo("");
       setDescripcion("");
       setPrecio("");
       setUbicacion("");
@@ -132,7 +133,7 @@ function AgregarPropiedad() {
     <div className="agregar-propiedad-container">
       <h2>{editId ? "Editar Propiedad" : "Agregar Propiedad"}</h2>
       <form className="agregar-propiedad-form" onSubmit={handleSubmit}>
-         <label>Título</label>
+        <label>Título</label>
         <input
           type="text"
           placeholder="Título de la propiedad"
@@ -254,14 +255,36 @@ function AgregarPropiedad() {
           onChange={handleImagenesChange}
           accept="image/*"
         />
-        {/* Vista previa de imágenes */}
+        {/* Vista previa de imágenes con botón para eliminar */}
         <div className="imagenes-preview">
           {previewUrls.map((url, idx) => (
-            <img
-              key={idx}
-              src={url}
-              alt={`preview-${idx}`}
-            />
+            <div key={idx} style={{ position: "relative", display: "inline-block", marginRight: 8 }}>
+              <img
+                src={url}
+                alt={`preview-${idx}`}
+                style={{ width: 90, height: 90, objectFit: "cover", borderRadius: 8 }}
+              />
+              <button
+                type="button"
+                onClick={() => handleRemoveImagen(idx)}
+                style={{
+                  position: "absolute",
+                  top: 2,
+                  right: 2,
+                  background: "#e63946",
+                  color: "#fff",
+                  border: "none",
+                  borderRadius: "50%",
+                  width: 22,
+                  height: 22,
+                  cursor: "pointer",
+                  fontWeight: "bold",
+                  lineHeight: "18px",
+                  padding: 0
+                }}
+                title="Eliminar imagen"
+              >×</button>
+            </div>
           ))}
         </div>
         <button type="submit" disabled={loading}>
