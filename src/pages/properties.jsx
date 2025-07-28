@@ -189,9 +189,19 @@ function Properties() {
                       <span>{property.banos || 'N/A'}</span>
                     </div>
                     <div className="feature">
-                      <span className="feature-label">Parqueaderos:</span>
-                      <span>{property.parqueaderos || 'N/A'}</span>
+                      <span className="feature-label">Parqueadero:</span>
+                      <span>{property.parqueadero || 'N/A'}</span>
                     </div>
+                    {property.parqueadero === "sí" && property.tipoParqueadero && (
+                      <div className="feature">
+                        <span className="feature-label">Tipo de parqueadero:</span>
+                        <span>
+                          {property.tipoParqueadero === "ambos"
+                            ? "carro y moto"
+                            : property.tipoParqueadero}
+                        </span>
+                      </div>
+                    )}
                     <div className="feature">
                       <span className="feature-label">Metros²:</span>
                       <span>{property.metrosCuadrados || 'N/A'}</span>
@@ -209,6 +219,10 @@ function Properties() {
                       <span>{property.tipo || 'N/A'}</span>
                     </div>
                   </div>
+                  <div className="feature">
+  <span className="feature-label">Estrato:</span>
+  <span>{property.estrato || 'N/A'}</span>
+</div>
                   
                   <div className="property-actions">
                     <a
@@ -294,9 +308,19 @@ function Properties() {
                     <span className="feature-value">{selectedProperty.banos || 'N/A'}</span>
                   </div>
                   <div className="feature-item">
-                    <span className="feature-label">Parqueaderos:</span>
-                    <span className="feature-value">{selectedProperty.parqueaderos || 'N/A'}</span>
+                    <span className="feature-label">Parqueadero:</span>
+                    <span className="feature-value">{selectedProperty.parqueadero || 'N/A'}</span>
                   </div>
+                  {selectedProperty.parqueadero === "sí" && selectedProperty.tipoParqueadero && (
+                    <div className="feature-item">
+                      <span className="feature-label">Tipo de parqueadero:</span>
+                      <span className="feature-value">
+                        {selectedProperty.tipoParqueadero === "ambos"
+                          ? "carro y moto"
+                          : selectedProperty.tipoParqueadero}
+                      </span>
+                    </div>
+                  )}
                   <div className="feature-item">
                     <span className="feature-label">Metros²:</span>
                     <span className="feature-value">{selectedProperty.metrosCuadrados || 'N/A'}</span>
@@ -313,6 +337,10 @@ function Properties() {
                     <span className="feature-label">Tipo:</span>
                     <span className="feature-value">{selectedProperty.tipo || 'N/A'}</span>
                   </div>
+                  <div className="feature-item">
+                     <span className="feature-label">Estrato:</span>
+                     <span className="feature-value">{selectedProperty.estrato || 'N/A'}</span>
+                 </div>
                 </div>
               </div>
               

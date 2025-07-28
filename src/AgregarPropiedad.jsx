@@ -17,6 +17,7 @@ function AgregarPropiedad() {
   const [areaPrivada, setAreaPrivada] = useState("");
   const [areaConstruida, setAreaConstruida] = useState("");
   const [tipo, setTipo] = useState("");
+  const [estrato, setEstrato] = useState(""); // Nuevo campo estrato
   const [imagenes, setImagenes] = useState([]);
   const [previewUrls, setPreviewUrls] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -41,6 +42,7 @@ function AgregarPropiedad() {
       setAreaPrivada(prop.areaPrivada || "");
       setAreaConstruida(prop.areaConstruida || "");
       setTipo(prop.tipo || "");
+      setEstrato(prop.estrato || ""); // Cargar estrato si existe
       setEditId(prop.id);
       setImagenesOriginales(prop.imagenes || []);
       setPreviewUrls(prop.imagenes || []);
@@ -94,6 +96,7 @@ function AgregarPropiedad() {
         areaPrivada,
         areaConstruida,
         tipo,
+        estrato, // Guardar estrato
         imagenes: imagenesUrls
       };
 
@@ -118,6 +121,7 @@ function AgregarPropiedad() {
       setAreaPrivada("");
       setAreaConstruida("");
       setTipo("");
+      setEstrato("");
       setImagenes([]);
       setPreviewUrls([]);
       setEditId(null);
@@ -247,6 +251,22 @@ function AgregarPropiedad() {
           <option value="casa">Casa</option>
           <option value="oficina">Oficina</option>
           <option value="local">Local</option>
+          <option value="finca">Finca</option>
+          <option value="edificio">Edificio</option>
+        </select>
+        <label>Estrato</label>
+        <select
+          value={estrato}
+          onChange={e => setEstrato(e.target.value)}
+          required
+        >
+          <option value="">Selecciona el estrato</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
         </select>
         <label>Imágenes</label>
         <input
